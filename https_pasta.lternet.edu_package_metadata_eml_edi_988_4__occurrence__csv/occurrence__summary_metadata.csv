@@ -1,0 +1,21 @@
+name,value
+File_Name,occurrence
+Date_Downloaded,2021-10-12 11:27:20
+Data_ID,https://pasta.lternet.edu/package/data/eml/edi/988/4/7ad56af78ac5f73d81f5e80293f1d6c9
+Data_URL,https://gmn.edirepository.org/mn/v2/object/https:%2F%2Fpasta.lternet.edu%2Fpackage%2Fdata%2Feml%2Fedi%2F988%2F4%2F7ad56af78ac5f73d81f5e80293f1d6c9
+Metadata_ID,https://pasta.lternet.edu/package/metadata/eml/edi/988/4
+Metadata_URL,https://gmn.edirepository.org/mn/v2/object/https:%2F%2Fpasta.lternet.edu%2Fpackage%2Fmetadata%2Feml%2Fedi%2F988%2F4
+Metadata_EML_Version,2.2.0
+File_Description,DwC-A Occurrence Table
+Dataset_URL,https://search.dataone.org/#view/https://pasta.lternet.edu/package/metadata/eml/edi/988/4
+Dataset_Title,California Harmful Algal Bloom Monitoring and Alert Program Data (Darwin Core Archive format)
+Dataset_StartDate,2005-06-03
+Dataset_EndDate,2021-09-29
+Dataset_Location,"Coast of California, United States"
+Dataset_WestBoundingCoordinate,-124.629
+Dataset_EastBoundingCoordinate,-116.631
+Dataset_NorthBoundingCoordinate,42.033
+Dataset_SouthBoundingCoordinate,32.25
+Dataset_Taxonomy,Chromista; Harosa; Alveolata; Myzozoa; Dinozoa; Dinoflagellata; Dinophyceae; Gymnodiniales; Gymnodiniaceae; Akashiwo; Akashiwo sanguinea; Gonyaulacales; Ostreopsidaceae; Alexandrium; Ceratiaceae; Ceratium; Cochlodinium; Dinophysiales; Dinophysaceae; Dinophysis; Gymnodinium; Gonyaulacaceae; Lingulodinium; Lingulodinium polyedra; Prorocentrales; Prorocentraceae; Prorocentrum; Heterokonta; Ochrophyta; Khakista; Bacillariophyceae; Bacillariophycidae; Bacillariophycanae; Bacillariales; Bacillariaceae; Pseudo-nitzschia; Pseudo-nitzschia delicatissima; Pseudo-nitzschia seriata
+Dataset_Abstract,"The Harmful Algal Bloom Monitoring and Alert Program (HABMAP) was formed in 2008 and provides updates on current algal blooms and facilitates information exchange among scientists, federal and state managers, and the general public in California. A major component of this program is regional HAB monitoring with support from the Southern California Coastal Ocean Observing System (SCCOOS) and the Central and Northern California Ocean Observing System (CeNCOOS). Water samples and net tows are collected once per week at piers to monitor for HAB species, the neurotoxin domoic acid, and water quality data including temperature, chlorophyll-a, and nutrients.; The sampling stations represented in this dataset include Santa Cruz Wharf, Monterey Wharf, Cal Poly Pier, Stearns Wharf, Santa Monica Pier, Newport Beach Pier, and Scripps Pier. These data are consolidated and reformatted into Darwin Core Archive (DwC-A) format from the level 1 site-specific datasets hosted on the SCCOOS ERDDAP server: (https://erddap.sccoos.org/erddap/tabledap/index.html?page=1)."
+Dataset_People,Clarissa; Anderson; Mark; Brzesinski; Dave; Caron; Melissa; Carter; Janice; Jones; Raphael; Kudela; John; Largier; Kendra; Negrey; Alexis; Pasulka; Henry; Ruhl; Rebecca; Shipe; G. Jason; Smith; Jayme; Joseph; Tyburczy; Ryan; Walter; Libe; Washburn; Vicky; Rowley; Abigail; Benson; Ian; Brunjes
