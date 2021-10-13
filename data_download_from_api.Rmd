@@ -10,48 +10,79 @@ knitr::opts_chunk$set(echo = TRUE)
 library(here)
 library(tidyverse)
 library(metajam)
+library(sf)
 ```
-We are using `metajam` to download HAB data for the CA coast from DataOne. 
+We are using `metajam` to download HAB data for the CA coast from DataOne. We wil specifically filter for locations at the Scripps Pier in La Jolla.
 
 "California Harmful Algal bloom Monitoring and ALert Program Data"
 
 https://search.dataone.org/view/https%3A%2F%2Fpasta.lternet.edu%2Fpackage%2Fmetadata%2Feml%2Fedi%2F988%2F4#https%3A%2F%2Fpasta.lternet.edu%2Fpackage%2Fdata%2Feml%2Fedi%2F988%2F4%2F4119639092e62c55ea8be348e4d9260d
 
-## Event data download
-- By looking at the metadata, this includes location and geometric info 
-```{r, error=TRUE}
-event_data_url <- "https://cn.dataone.org/cn/v2/resolve/https%3A%2F%2Fpasta.lternet.edu%2Fpackage%2Fdata%2Feml%2Fedi%2F988%2F4%2F4119639092e62c55ea8be348e4d9260d"
 
+
+## All data download: Event, Occurrence, and Extended Measurement Data
+```{r, eval=FALSE}
 path <- here()
+
+# Event Data Download
+event_data_url <- "https://cn.dataone.org/cn/v2/resolve/https%3A%2F%2Fpasta.lternet.edu%2Fpackage%2Fdata%2Feml%2Fedi%2F988%2F4%2F4119639092e62c55ea8be348e4d9260d"
 
 event_data <- download_d1_data(event_data_url, path)
 
 # returns a list of all of the data in the folder 
 all_event_data <- metajam::read_d1_files(here("https_pasta.lternet.edu_package_metadata_eml_edi_988_4__event__csv"))
 
-View(all_event_data$data)
-```
 
-## Occurrence Data
-- From looking at the metadata, this includes organism information 
-```{r, error = TRUE}
+# Occurrence Data Download
 occ_data_url <- "https://cn.dataone.org/cn/v2/resolve/https%3A%2F%2Fpasta.lternet.edu%2Fpackage%2Fdata%2Feml%2Fedi%2F988%2F4%2F7ad56af78ac5f73d81f5e80293f1d6c9"
-
 occ_data <- download_d1_data(occ_data_url, path)
 
 all_occ_data <- read_d1_files(here("https_pasta.lternet.edu_package_metadata_eml_edi_988_4__occurrence__csv"))
 
-View(all_occ_data$attribute_metadata)
-```
 
-## Extended Measurement Data 
-- From the metadata, this contains information about measurement type, value, etc.  
-```{r, error = TRUE}
 ext_data_url <- "https://cn.dataone.org/cn/v2/resolve/https%3A%2F%2Fpasta.lternet.edu%2Fpackage%2Fdata%2Feml%2Fedi%2F988%2F4%2Ff616903aa9a2592cb3082cb3b9525270"
 
 ext_data <- download_d1_data(ext_data_url, path)
 
 all_ext_data <- read_d1_files(here("https_pasta.lternet.edu_package_metadata_eml_edi_988_4__extendedmeasurementorfact__csv"))
+
+```
+
+
+## Event data filtering
+- By looking at the metadata, this includes location and geometric info 
+```{r, error=TRUE}
+
+# view all event data
+View(all_event_data$data)
+
+# filter for ScrippsPier
+scripps_events <- all_event_data$data %>% 
+  filter(locationID == "HABs-ScrippsPier")
+
+view(scripps_events)
+
+```
+
+```{r}
+ggplot(data = scripps_events, aes(x = eventDate)) +
+  geom_hist()
+
+```
+
+
+
+## Occurrence Data
+- From looking at the data and metadata, this includes organism information 
+```{r, error = TRUE}
+
+View(all_occ_data$attribute_metadata)
+view(all_occ_data$data)
+```
+
+## Extended Measurement Data 
+- From the data and metadata, this contains information about measurement type, value, etc.  
+```{r, error = TRUE}
 
 View(all_ext_data$attribute_metadata)
 View(all_ext_data$data)
