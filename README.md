@@ -12,6 +12,7 @@ Authors:
 Data being used (first accessed 10/23/2021): https://search.dataone.org/view/https%3A%2F%2Fpasta.lternet.edu%2Fpackage%2Fmetadata%2Feml%2Fedi%2F988%2F4#https%3A%2F%2Fpasta.lternet.edu%2Fpackage%2Fdata%2Feml%2Fedi%2F988%2F4%2F4119639092e62c55ea8be348e4d9260d
 
 Data log:
+
 https://docs.google.com/spreadsheets/d/1lrbHYGgkFFKWkZzsiaifPhJX9AvNqXgJJPegBbBYI_g/edit?usp=sharing
 
 ## Data Management
