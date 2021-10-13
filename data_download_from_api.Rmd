@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(here)
 library(tidyverse)
 library(metajam)
-library(sf)
+library(lubridate)
 ```
 We are using `metajam` to download HAB data for the CA coast from DataOne. We wil specifically filter for locations at the Scripps Pier in La Jolla.
 
@@ -18,33 +18,42 @@ We are using `metajam` to download HAB data for the CA coast from DataOne. We wi
 
 https://search.dataone.org/view/https%3A%2F%2Fpasta.lternet.edu%2Fpackage%2Fmetadata%2Feml%2Fedi%2F988%2F4#https%3A%2F%2Fpasta.lternet.edu%2Fpackage%2Fdata%2Feml%2Fedi%2F988%2F4%2F4119639092e62c55ea8be348e4d9260d
 
-
-
-## All data download: Event, Occurrence, and Extended Measurement Data
-```{r, eval=FALSE}
+```{r}
+# set file path
 path <- here()
+
+```
+
+
+## Data download: Event, Occurrence, and Extended Measurement Data.
+ - Only run if data not already downloaded locally
+```{r, eval=FALSE}
 
 # Event Data Download
 event_data_url <- "https://cn.dataone.org/cn/v2/resolve/https%3A%2F%2Fpasta.lternet.edu%2Fpackage%2Fdata%2Feml%2Fedi%2F988%2F4%2F4119639092e62c55ea8be348e4d9260d"
-
 event_data <- download_d1_data(event_data_url, path)
-
-# returns a list of all of the data in the folder 
-all_event_data <- metajam::read_d1_files(here("https_pasta.lternet.edu_package_metadata_eml_edi_988_4__event__csv"))
 
 
 # Occurrence Data Download
 occ_data_url <- "https://cn.dataone.org/cn/v2/resolve/https%3A%2F%2Fpasta.lternet.edu%2Fpackage%2Fdata%2Feml%2Fedi%2F988%2F4%2F7ad56af78ac5f73d81f5e80293f1d6c9"
 occ_data <- download_d1_data(occ_data_url, path)
 
+
+# Extended Measurement Download
+ext_data_url <- "https://cn.dataone.org/cn/v2/resolve/https%3A%2F%2Fpasta.lternet.edu%2Fpackage%2Fdata%2Feml%2Fedi%2F988%2F4%2Ff616903aa9a2592cb3082cb3b9525270"
+ext_data <- download_d1_data(ext_data_url, path)
+```
+
+## 
+```{r}
+
+# returns a list of all of the data in the folder 
+all_event_data <- metajam::read_d1_files(here("https_pasta.lternet.edu_package_metadata_eml_edi_988_4__event__csv"))
+
 all_occ_data <- read_d1_files(here("https_pasta.lternet.edu_package_metadata_eml_edi_988_4__occurrence__csv"))
 
-
-ext_data_url <- "https://cn.dataone.org/cn/v2/resolve/https%3A%2F%2Fpasta.lternet.edu%2Fpackage%2Fdata%2Feml%2Fedi%2F988%2F4%2Ff616903aa9a2592cb3082cb3b9525270"
-
-ext_data <- download_d1_data(ext_data_url, path)
-
 all_ext_data <- read_d1_files(here("https_pasta.lternet.edu_package_metadata_eml_edi_988_4__extendedmeasurementorfact__csv"))
+
 
 ```
 
@@ -57,16 +66,35 @@ all_ext_data <- read_d1_files(here("https_pasta.lternet.edu_package_metadata_eml
 View(all_event_data$data)
 
 # filter for ScrippsPier
-scripps_events <- all_event_data$data %>% 
-  filter(locationID == "HABs-ScrippsPier")
+scripps <- all_event_data$data %>% 
+  filter(locationID == "HABs-ScrippsPier") %>% 
+  data.frame()
 
-view(scripps_events)
+view(scripps)
+
+occ <- all_occ_data$data %>% data.frame()
+ext <- all_ext_data$data %>% data.frame()
 
 ```
 
+# join different data sets together.  
 ```{r}
-ggplot(data = scripps_events, aes(x = eventDate)) +
-  geom_hist()
+scripps_1 <- left_join(scripps, occ, by = "id")
+
+scripps_combined <- left_join(scripps_1, ext, by = "id")
+```
+
+
+```{r}
+
+scripps_1 <- scripps %>% 
+  group_by(eventDate) %>% 
+  summarize(count = )
+  
+
+
+ggplot(data = scripps, aes(x = eventDate, y = )) +
+  geom_point()
 
 ```
 
