@@ -11,12 +11,15 @@ library(here)
 library(tidyverse)
 library(metajam)
 library(lubridate)
+
 ```
 We are using `metajam` to download HAB data for the CA coast from DataOne. We wil specifically filter for locations at the Scripps Pier in La Jolla.
 
 "California Harmful Algal bloom Monitoring and ALert Program Data"
 
 https://search.dataone.org/view/https%3A%2F%2Fpasta.lternet.edu%2Fpackage%2Fmetadata%2Feml%2Fedi%2F988%2F4#https%3A%2F%2Fpasta.lternet.edu%2Fpackage%2Fdata%2Feml%2Fedi%2F988%2F4%2F4119639092e62c55ea8be348e4d9260d
+
+https://cran.r-project.org/web/packages/rnoaa/rnoaa.pdf
 
 ```{r}
 # set file path
@@ -79,22 +82,18 @@ ext <- all_ext_data$data %>% data.frame()
 
 # join different data sets together.  
 ```{r}
+# joins Scripps event data and occurrence data
 scripps_1 <- left_join(scripps, occ, by = "id")
 
+# joins Scripps event data/occurrence data with extended measurement data
 scripps_combined <- left_join(scripps_1, ext, by = "id")
 ```
 
 
 ```{r}
 
-scripps_1 <- scripps %>% 
-  group_by(eventDate) %>% 
-  summarize(count = )
-  
+unique(scripps_combined$measurementType)
 
-
-ggplot(data = scripps, aes(x = eventDate, y = )) +
-  geom_point()
 
 ```
 
