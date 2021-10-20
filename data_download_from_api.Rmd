@@ -73,10 +73,11 @@ scripps <- all_event_data$data %>%
   filter(locationID == "HABs-ScrippsPier") %>% 
   data.frame()
 
-view(scripps)
+# View used to double check creation of dataframe. Not necessary for workflow
+# view(scripps)
 
-occ <- all_occ_data$data %>% data.frame()
-ext <- all_ext_data$data %>% data.frame()
+occ <- all_occ_data$data
+ext <- all_ext_data$data
 
 ```
 
@@ -89,14 +90,34 @@ scripps_1 <- left_join(scripps, occ, by = "id")
 scripps_combined <- left_join(scripps_1, ext, by = "id")
 ```
 
+```{r}
+
+# Remove columns unrelated to our anticipated analysis on HABs
+scripps_combined <- scripps_combined %>% 
+  select(-c(eventID, locationID, eventRemarks, basisOfRecord, decimalLatitude, decimalLongitude,minimumDepthInMeters, maximumDepthInMeters,coordinateUncertaintyInMeters, measurementID, measurementTypeID, measurementUnitID)) 
+
+```
 
 ```{r}
 
 unique(scripps_combined$measurementType)
 
-
+# View used to double check creation of dataframe. Not necessary for workflow
+# view(scripps_combined)
 ```
 
+## HAB Analysis
+ - Create time series of total HAB events per year
+ - 
+
+
+
+
+```{r}
+plot <- ggplot(data = scripps_combined, aes(x = organismQuantity)) +
+  geom_histogram(bins = 200)
+plot
+```
 
 
 ## Occurrence Data
