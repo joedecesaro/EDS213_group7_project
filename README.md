@@ -2,7 +2,7 @@
 
 This project is part of the MEDS class EDS 213 - Metadata Standards, Data Modeling, and Data Semantics
 
-For the purposes of this project we will be exploring the question: how have harmful algal blooms changed since 2008 at the Scripps Pier?
+For the purposes of this project we will be exploring the question: how have harmful algal blooms (HABs) changed since 2008 at the Scripps Pier?
 
 Authors: 
 * Felicia Cruz: feliciamcruz@ucsb.edu
@@ -21,10 +21,20 @@ https://docs.google.com/spreadsheets/d/1lrbHYGgkFFKWkZzsiaifPhJX9AvNqXgJJPegBbBY
   
 2) **How much time is needed to manage the data and who will be responsible for doing so?**
     - The data is relatively manageable in size and should not take long to download. It took our group less than 20 minutes. Any member of the group can be contacted to explain this process.
-    - The official contact for the dataset itself is Clarissa Anderson from the University of California, San Diego and can be contacted at: clrander@ucsd.edu
+    - The official contact for the raw dataset itself is Clarissa Anderson from the University of California, San Diego and can be contacted at: clrander@ucsd.edu.
+    - For the purposes of this project, any of the above authors can be contacted via the listed emails for more information.
 
 3) **How long should the data be preserved and where is the best location to do so?**
-    - The data is preserved on DataOne and should be available indefinitely to the authors of this project's knowledge.
+    - The raw data is preserved on DataOne and should be available indefinitely to the authors of this project's knowledge.
+    - The dataset for this project, after joining and manipulation, is stored on the repository knb and is linked below.
 
 4) **Are there any legal constraints associated with acquiring, using and sharing project data?**
     - There are no known legal constraints in acquiring, using, or sharing the data associated with this project.
+
+## Data Preservation
+The data used for analysis can be found here: [INSERT LINK]
+
+## Data Analysis
+   - For the purposes of our analysis our team explored... represented in the figure below
+   - If time or resources allow for future analysis we would recommend exploring more locations than just the Scripps Pier in San Diego. This could include making a map with information about HABs over time for each location. This could also include how each location compares in each year to identify patterns of changes in Southern California compared to Northern California.
+    
