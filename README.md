@@ -21,7 +21,7 @@ https://docs.google.com/spreadsheets/d/1lrbHYGgkFFKWkZzsiaifPhJX9AvNqXgJJPegBbBY
   
 2) **How much time is needed to manage the data and who will be responsible for doing so?**
     - The data is relatively manageable in size and should not take long to download. It took our group less than 20 minutes. Any member of the group can be contacted to explain this process.
-    - The official contact for the dataset itself is Clarissa Anderson from the University of California, San Diego and can be contacted at: clrander@ucsd.edu
+    - The official contact for the raw dataset itself is Clarissa Anderson from the University of California, San Diego and can be contacted at: clrander@ucsd.edu
 
 3) **How long should the data be preserved and where is the best location to do so?**
     - The data is preserved on DataOne and should be available indefinitely to the authors of this project's knowledge.
