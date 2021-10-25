@@ -30,6 +30,7 @@ path <- here()
 
 ## Data download: Event, Occurrence, and Extended Measurement Data.
  - Only run if data not already downloaded locally
+ - Or alternatively, delete three "data pasta" folders and run all.
 ```{r, eval=FALSE}
 
 # Event Data Download
@@ -94,8 +95,16 @@ scripps_combined <- left_join(scripps_1, ext, by = "id")
 
 # Remove columns unrelated to our anticipated analysis on HABs
 scripps_combined <- scripps_combined %>% 
-  select(-c(eventID, locationID, eventRemarks, basisOfRecord, decimalLatitude, decimalLongitude,minimumDepthInMeters, maximumDepthInMeters,coordinateUncertaintyInMeters, measurementID, measurementTypeID, measurementUnitID)) 
-
+  
+  # select columns of interest
+  select(-c(eventID, locationID, eventRemarks, basisOfRecord, decimalLatitude, decimalLongitude,minimumDepthInMeters, maximumDepthInMeters,coordinateUncertaintyInMeters, measurementID, measurementTypeID, measurementUnitID)) %>% 
+  
+  # remove NA values
+  drop_na() %>% 
+  
+  # create year column
+  mutate(year = lubridate::year(eventDate))
+  
 ```
 
 ```{r}
@@ -111,12 +120,49 @@ unique(scripps_combined$measurementType)
  - 
 
 
+```{r}
+scripps_nutrients <- scripps_combined %>% 
+  group_by(year, measurementType) %>% 
+  summarize(Measurement_sum = sum(measurementValue))
+
+scripps_nutrients
+
+scripps_quantity <- scripps_combined %>% 
+  group_by(year, scientificName) %>% 
+  summarize(Organism_sum = sum(organismQuantity)) %>% 
+  mutate(year = as.factor(year))
+
+scripps_quantity
+  
+```
+
 
 
 ```{r}
-plot <- ggplot(data = scripps_combined, aes(x = organismQuantity)) +
-  geom_histogram(bins = 200)
+
+plot <- ggplot(data = scripps_quantity, aes(x = year, y = Organism_sum, color = scientificName)) +
+  geom_line() +
+  labs(title = "Scripps Pier Algae Counts from 2011 to 2020",
+       x = "Year",
+       y = "Organism Counts")
 plot
+```
+```{r}
+
+## Units are different for constituents
+plot <- ggplot(data = scripps_nutrients, aes(x = year, y = Measurement_sum, color = measurementType)) +
+  geom_line() +
+  labs(title = "Scripps Pier Yearly Measurement Totals")
+plot
+```
+
+
+
+```{r}
+plot2 <- ggplot(data = scripps_combined, aes(x = eventDate, y = organismQuantity)) +
+  geom_point(aes(color = scientificName)) +
+  ylim(0,25000)
+plot2
 ```
 
 
