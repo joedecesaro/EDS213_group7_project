@@ -1,8 +1,8 @@
-# EDS213_group7_project
+# Harmful Algal Bloom (HAB) Event Information from 2011 to 2020 for the Scripps Pier in San Diego California
 
 This project is part of the MEDS class EDS 213 - Metadata Standards, Data Modeling, and Data Semantics
 
-For the purposes of this project we will be exploring the question: how have harmful algal blooms (HABs) changed since 2008 at the Scripps Pier?
+For the purposes of this project we will be exploring the question: How have harmful algal blooms (HABs) changed since 2011 at the Scripps Pier?
 
 Authors: 
 * Felicia Cruz: feliciamcruz@ucsb.edu
@@ -32,9 +32,13 @@ https://docs.google.com/spreadsheets/d/1lrbHYGgkFFKWkZzsiaifPhJX9AvNqXgJJPegBbBY
     - There are no known legal constraints in acquiring, using, or sharing the data associated with this project.
 
 ## Data Preservation
-The data used for analysis can be found here: [INSERT LINK]
+The data used for analysis can be found here: https://knb.ecoinformatics.org/view/urn%3Auuid%3A709c11da-37b7-4009-aeb7-6f0e1c7c71f2
 
 ## Data Analysis
-   - For the purposes of our analysis our team explored... represented in the figure below
-   - If time or resources allow for future analysis we would recommend exploring more locations than just the Scripps Pier in San Diego. This could include making a map with information about HABs over time for each location. This could also include how each location compares in each year to identify patterns of changes in Southern California compared to Northern California.
+   - For the purposes of our analysis our team explored how HAB events changed over time at the Scripps Pier location.
+   - We produced the figure below showing showing total organism quantity per year in cells per liter.
     
+![Scripps_bar_graph](https://user-images.githubusercontent.com/88208081/138955704-0622205e-5f28-4c2a-a1ca-1f433de51a60.png)
+
+ - If time or resources allow for future analysis we would recommend exploring more locations than just the Scripps Pier in San Diego. This could include making a map with information about HABs over time for each location. This could also include how each location compares in each year to identify patterns of changes in Southern California compared to Northern California.
+
