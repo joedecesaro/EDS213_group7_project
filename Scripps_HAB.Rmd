@@ -1,0 +1,195 @@
+---
+title: "Harmful Algal Bloom (HAB) Event Information from 2011 to 2020 for the Scripps Pier in San Diego California"
+author: "Felicia Cruz, Joe Decesaro, Steven Cognac"
+date: "10/16/2021"
+output: 
+  html_document:
+    theme: flatly
+    code_folding: show
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+	message = FALSE,
+	warning = FALSE)
+
+library(here)
+library(tidyverse)
+library(metajam)
+library(lubridate)
+
+```
+We are using `metajam` to download HAB data for the CA coast from DataOne. We wil specifically filter for locations at the Scripps Pier in La Jolla.
+
+"California Harmful Algal bloom Monitoring and ALert Program Data"
+
+https://search.dataone.org/view/https%3A%2F%2Fpasta.lternet.edu%2Fpackage%2Fmetadata%2Feml%2Fedi%2F988%2F4#https%3A%2F%2Fpasta.lternet.edu%2Fpackage%2Fdata%2Feml%2Fedi%2F988%2F4%2F4119639092e62c55ea8be348e4d9260d
+
+
+```{r}
+# set file path
+path <- here()
+
+```
+
+
+# Data Download
+
+## Event, Occurrence, and Extended Measurement Data.
+
+```{r, eval=FALSE}
+
+# Only run if data not already downloaded locally
+# Or alternatively, delete three "data pasta" folders and run all.
+
+# Event Data Download
+event_data_url <- "https://cn.dataone.org/cn/v2/resolve/https%3A%2F%2Fpasta.lternet.edu%2Fpackage%2Fdata%2Feml%2Fedi%2F988%2F4%2F4119639092e62c55ea8be348e4d9260d"
+event_data <- download_d1_data(event_data_url, path)
+
+
+# Occurrence Data Download
+occ_data_url <- "https://cn.dataone.org/cn/v2/resolve/https%3A%2F%2Fpasta.lternet.edu%2Fpackage%2Fdata%2Feml%2Fedi%2F988%2F4%2F7ad56af78ac5f73d81f5e80293f1d6c9"
+occ_data <- download_d1_data(occ_data_url, path)
+
+
+# Extended Measurement Download
+ext_data_url <- "https://cn.dataone.org/cn/v2/resolve/https%3A%2F%2Fpasta.lternet.edu%2Fpackage%2Fdata%2Feml%2Fedi%2F988%2F4%2Ff616903aa9a2592cb3082cb3b9525270"
+ext_data <- download_d1_data(ext_data_url, path)
+```
+
+```{r}
+
+# returns a list of all of the data in the folder 
+all_event_data <- metajam::read_d1_files(here("https_pasta.lternet.edu_package_metadata_eml_edi_988_4__event__csv"))
+
+all_occ_data <- read_d1_files(here("https_pasta.lternet.edu_package_metadata_eml_edi_988_4__occurrence__csv"))
+
+all_ext_data <- read_d1_files(here("https_pasta.lternet.edu_package_metadata_eml_edi_988_4__extendedmeasurementorfact__csv"))
+
+
+```
+## View metadata
+
+### Occurrence Data
+- From looking at the data and metadata, this includes organism information 
+```{r, error = TRUE}
+
+View(all_occ_data$attribute_metadata)
+view(all_occ_data$data)
+```
+
+### Extended Measurement Data 
+- From the data and metadata, this contains information about measurement type, value, etc.  
+```{r, error = TRUE}
+
+View(all_ext_data$attribute_metadata)
+View(all_ext_data$data)
+```
+
+
+# Data Analysis
+
+## Event data filtering for Scripps Pier only
+- By looking at the metadata, this includes location and geometric info 
+- Filter by single location; Scripps Pier in La Jolla, CA.
+
+```{r, error=TRUE}
+
+# view all event data
+View(all_event_data$data)
+
+# filter for ScrippsPier
+scripps <- all_event_data$data %>% 
+  filter(locationID == "HABs-ScrippsPier") %>% 
+  data.frame()
+
+# View used to double check creation of dataframe. Not necessary for workflow
+# view(scripps)
+
+occ <- all_occ_data$data
+ext <- all_ext_data$data
+
+```
+
+## Join data sets together.  
+```{r}
+# joins Scripps event data and occurrence data
+scripps_1 <- left_join(scripps, occ, by = "id")
+
+# joins Scripps event data/occurrence data with extended measurement data
+scripps_combined <- left_join(scripps_1, ext, by = "id")
+```
+
+
+```{r}
+
+# Remove columns unrelated to our anticipated analysis on HABs
+scripps_combined <- scripps_combined %>% 
+  
+  # select columns of interest
+  select(-c(eventID, locationID, eventRemarks, basisOfRecord, decimalLatitude, decimalLongitude,minimumDepthInMeters, maximumDepthInMeters,coordinateUncertaintyInMeters, measurementID, measurementTypeID, measurementUnitID)) %>% 
+  
+  # remove NA values
+  drop_na() %>% 
+  
+  # create year column
+  mutate(year = lubridate::year(eventDate))
+  
+```
+
+
+## Export new dataset as .csv
+```{r}
+scripps_data <- write.csv(scripps_combined, here("data", "scripps_pier_HAB_data.csv"), row.names = TRUE)
+```
+
+
+# HAB Analysis
+
+## Create subset of Scripps data of algae totals by year and scientific names.
+```{r}
+# create yearly organism total based on scientific name.
+scripps_quantity <- scripps_combined %>% 
+  group_by(year, scientificName) %>% 
+  summarize(Organism_sum = sum(organismQuantity)) %>% 
+  mutate(year = as.factor(year))
+scripps_quantity
+
+# create subset of unique events grouped by year and id.
+scripps_events <- scripps_combined %>% 
+  group_by(year) %>% 
+  summarize(event = unique(id)) %>% 
+  mutate(year = as.factor(year))
+scripps_events
+  
+```
+
+### Stacked Bar Graph of algae count totals per year.
+```{r}
+plot1 <- ggplot(data = scripps_quantity, aes(fill = scientificName, y = Organism_sum, x = year)) +
+  geom_bar(position = "stack", stat = "identity") +
+  labs(title = "Scripps Pier Algae Counts from 2011 to 2020",
+       x = "Year",
+       y = "Organism Counts (cells/L)")
+plot1
+
+plot1 <- ggsave(here("figs", "Scripps_bar_graph.png"))
+```
+
+
+
+### Line plot of algae counts per year based on species.
+```{r}
+plot2 <- ggplot(data = scripps_combined, aes(x = eventDate, y = organismQuantity)) +
+  geom_line(aes(color = scientificName)) +
+  ylim(0,25000) +
+  labs(x = "Date",
+       y = "Organism Counts",
+       title = "Scripps Pier Algae Counts from 2011 to 2020")
+plot2
+ggsave(here("figs", "Scripps_line_graph.png"))
+```
+
+
