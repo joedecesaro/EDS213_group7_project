@@ -1,9 +1,8 @@
 # Harmful Algal Bloom (HAB) Event Information from 2011 to 2020 for the Scripps Pier in San Diego California
-## EDS 213 group project 
 
 This project is part of the MEDS class EDS 213 - Metadata Standards, Data Modeling, and Data Semantics
 
-For the purposes of this project we will be exploring the question: how have harmful algal blooms (HABs) changed since 2008 at the Scripps Pier?
+For the purposes of this project we will be exploring the question: How have harmful algal blooms (HABs) changed since 2011 at the Scripps Pier?
 
 Authors: 
 * Felicia Cruz: feliciamcruz@ucsb.edu
