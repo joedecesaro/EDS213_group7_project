@@ -38,6 +38,7 @@ The data used for analysis can be found here: https://knb.ecoinformatics.org/vie
    - For the purposes of our analysis our team explored how HAB events changed over time at the Scripps Pier location.
    - We produced the figure below showing showing total organism quantity per year in cells per liter.
     
-![Scripps_bar_graph](https://user-images.githubusercontent.com/88208081/138954647-b661b6d5-1dc6-40da-9405-686079b9a8e9.png)
+![Scripps_bar_graph](https://user-images.githubusercontent.com/88208081/138955704-0622205e-5f28-4c2a-a1ca-1f433de51a60.png)
 
  - If time or resources allow for future analysis we would recommend exploring more locations than just the Scripps Pier in San Diego. This could include making a map with information about HABs over time for each location. This could also include how each location compares in each year to identify patterns of changes in Southern California compared to Northern California.
+
