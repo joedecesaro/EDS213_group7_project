@@ -36,7 +36,7 @@ The data used for analysis can be found here: https://knb.ecoinformatics.org/vie
 
 ## Data Analysis
    - For the purposes of our analysis our team explored how HAB events changed over time at the Scripps Pier location.
-   - We produced the figure below showing showing total organism quantity per year in mg/liter.
+   - We produced the figure below showing showing total organism quantity per year in cells per liter.
     
 ![Scripps_bar_graph](https://user-images.githubusercontent.com/88208081/138954647-b661b6d5-1dc6-40da-9405-686079b9a8e9.png)
 
