@@ -1,5 +1,5 @@
 # Harmful Algal Bloom (HAB) Event Information from 2011 to 2020 for the Scripps Pier in San Diego California
-# EDS 213: 
+## EDS 213 group project 
 
 This project is part of the MEDS class EDS 213 - Metadata Standards, Data Modeling, and Data Semantics
 
