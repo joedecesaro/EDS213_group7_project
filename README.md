@@ -32,9 +32,12 @@ https://docs.google.com/spreadsheets/d/1lrbHYGgkFFKWkZzsiaifPhJX9AvNqXgJJPegBbBY
     - There are no known legal constraints in acquiring, using, or sharing the data associated with this project.
 
 ## Data Preservation
-The data used for analysis can be found here: [INSERT LINK]
+The data used for analysis can be found here: https://knb.ecoinformatics.org/view/urn%3Auuid%3A709c11da-37b7-4009-aeb7-6f0e1c7c71f2
 
 ## Data Analysis
-   - For the purposes of our analysis our team explored... represented in the figure below
-   - If time or resources allow for future analysis we would recommend exploring more locations than just the Scripps Pier in San Diego. This could include making a map with information about HABs over time for each location. This could also include how each location compares in each year to identify patterns of changes in Southern California compared to Northern California.
+   - For the purposes of our analysis our team explored how HAB events changed over time at the Scripps Pier location.
+   - We produced the figure below showing event counts per year, colored by organism type. 
     
+![Scripps_bar_graph](https://user-images.githubusercontent.com/88208081/138954647-b661b6d5-1dc6-40da-9405-686079b9a8e9.png)
+
+ - If time or resources allow for future analysis we would recommend exploring more locations than just the Scripps Pier in San Diego. This could include making a map with information about HABs over time for each location. This could also include how each location compares in each year to identify patterns of changes in Southern California compared to Northern California.
