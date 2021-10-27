@@ -32,7 +32,7 @@ https://docs.google.com/spreadsheets/d/1lrbHYGgkFFKWkZzsiaifPhJX9AvNqXgJJPegBbBY
     - There are no known legal constraints in acquiring, using, or sharing the data associated with this project.
 
 ## Data Preservation
-The data used for analysis can be found here: https://knb.ecoinformatics.org/view/urn%3Auuid%3A709c11da-37b7-4009-aeb7-6f0e1c7c71f2
+The data used for analysis can be found here: https://knb.ecoinformatics.org/view/urn%3Auuid%3A59b5a00a-f9a5-46f9-b3aa-ccf8c4ddbd27
 
 ## Data Analysis
    - For the purposes of our analysis our team explored how HAB events changed over time at the Scripps Pier location.
